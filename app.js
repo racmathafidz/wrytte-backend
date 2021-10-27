@@ -33,8 +33,8 @@ app.use((req, res, next) => {
   next();
 });
 app.use(cors({
-//   origin: 'http://localhost:3000',
-  origin: true,
+  origin: 'http://localhost:3000',
+//   origin: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  
   credentials: true,
 }));
