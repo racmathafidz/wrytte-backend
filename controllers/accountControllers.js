@@ -4,9 +4,9 @@ const Article = require('../models/Article');
 
 const user_get = async (req, res) => {
   if (req.user) {
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3000'); 
-    res.set('Access-Control-Allow-Credentials', true);     
-    res.json(req.user);
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); 
+    res.header('Access-Control-Allow-Credentials', true);     
+    res.status(200).json(req.user);
   }
 };
 
