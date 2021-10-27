@@ -6,7 +6,7 @@ const user_get = async (req, res) => {
   if (req.user) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); 
     res.header('Access-Control-Allow-Credentials', true);     
-    res.status(200).json(req.user);
+    res.status(200).send(req.user);
   }
 };
 
