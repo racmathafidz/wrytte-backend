@@ -4,7 +4,7 @@ const Article = require('../models/Article');
 
 const user_get = async (req, res) => {
   if (req.user) {
-    res.header('Access-Control-Allow-Origin', '*').send(req.user);
+    res.send(req.user);
   }
 };
 
