@@ -30,8 +30,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Set public folder
 // Enable Cors
 app.use(cors({
   origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  
 }));
 
 // User's session management
