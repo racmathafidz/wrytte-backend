@@ -29,8 +29,9 @@ app.use(express.static(path.join(__dirname, 'public'))); // Set public folder
 
 // Enable Cors
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Credentials', 'true');
+  res.append('Access-Control-Allow-Origin', ['*']);
+  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.append('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
 app.use(cors({
