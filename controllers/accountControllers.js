@@ -3,9 +3,10 @@ const User = require('../models/User');
 const Article = require('../models/Article');
 
 const user_get = async (req, res) => {
-  if (req.user) {
-    res.send(req.user);
-  }
+//   if (req.user) {
+//     res.send(req.user);
+//   }
+  res.send({ msg: 'User Data' });
 };
 
 const account_profile_get = async (req, res) => {
