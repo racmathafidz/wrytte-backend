@@ -28,6 +28,10 @@ app.use(express.urlencoded({ extended: true })); // Convert request body and htm
 app.use(express.static(path.join(__dirname, 'public'))); // Set public folder
 
 // Enable Cors
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  
