@@ -28,16 +28,9 @@ app.use(express.urlencoded({ extended: true })); // Convert request body and htm
 app.use(express.static(path.join(__dirname, 'public'))); // Set public folder
 
 // Enable Cors
-app.use((req, res, next) => {
-  res.append('Access-Control-Allow-Origin', ['*']);
-  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.append('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
 app.use(cors({
-  origin: 'http://localhost:3000',
-//   origin: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],  
+  origin: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
 
