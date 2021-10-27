@@ -28,12 +28,13 @@ app.use(express.urlencoded({ extended: true })); // Convert request body and htm
 app.use(express.static(path.join(__dirname, 'public'))); // Set public folder
 
 // Enable Cors
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   next();
+// });
 app.use(cors({
-  origin: 'http://localhost:3000',
+//   origin: 'http://localhost:3000',
+  origin: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  
   credentials: true,
 }));
@@ -46,7 +47,7 @@ app.use(session({
 }));
 
 // Parsing cookie
-app.use(cookieParser()); // Cookie secret, have to match with session's secret
+app.use(cookieParser(keys.cookie.secretKey)); // Cookie secret, have to match with session's secret
 
 // Passport
 app.use(passport.initialize()); // Initializing passport
