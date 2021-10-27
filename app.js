@@ -49,7 +49,7 @@ app.use(session({
 }));
 
 // Parsing cookie
-app.use(cookieParser()); // Cookie secret, have to match with session's secret
+app.use(cookieParser(keys.cookie.secretKey)); // Cookie secret, have to match with session's secret
 
 // Passport
 app.use(passport.initialize()); // Initializing passport
