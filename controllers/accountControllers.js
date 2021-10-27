@@ -9,8 +9,8 @@ const user_get = async (req, res) => {
 //     res.status(200).send(req.user);
     res.status(200).json({
       success: true,
-      message: "user has successfully authenticated",
-      user: req.user,      
+      message: 'user has successfully authenticated',
+      user: 'Ok',      
     });
   }
 };
