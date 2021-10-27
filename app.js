@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Set public folder
 
 // Enable Cors
 app.use(cors({
-  origin: true,
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
