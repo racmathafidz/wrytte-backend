@@ -1,10 +1,13 @@
+/* eslint-disable max-len */
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const bcrypt = require('bcryptjs');
 
 const User = require('../models/User');
+const keys = require('./keys');
 
 // Local authenticate strategy
 passport.use(
@@ -12,6 +15,7 @@ passport.use(
   new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
+    passReqToCallback: true, // allows us to send the req from our route (lets us check if a user is logged in or not)
   },
   (email, password, done) => {
     User.findOne({ email }, (err, user) => {
@@ -28,6 +32,17 @@ passport.use(
       });
     });
   }),
+);
+
+// Google authenticate strategy
+passport.use(
+  new GoogleStrategy({
+    clientID: keys.google.clientID,
+    clientSecret: keys.google.clientSecret,
+    callbackURL: '/auth/google/redirect',
+    passReqToCallback: true, // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+  }),
+
 );
 
 // serialize user stores a cookie/session inside the browser

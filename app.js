@@ -15,7 +15,7 @@ const articleRoutes = require('./routes/articleRoutes');
 const accountRoutes = require('./routes/accountRoutes');
 const passportStrategyConfig = require('./config/passport');
 const localAuthRoutes = require('./routes/localAuthRoutes');
-// const googleAuthRoutes = require('./routes/googleAuthRoutes');
+const googleAuthRoutes = require('./routes/googleAuthRoutes');
 const signOutRoutes = require('./routes/signOutRoutes');
 
 // Port
@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth/local', localAuthRoutes);
-// app.use('/auth/google', googleAuthRoutes);
+app.use('/auth/google', googleAuthRoutes);
 app.use('/auth/signout', signOutRoutes);
 app.use('/api/article', articleRoutes);
 app.use('/api/account', accountRoutes);
