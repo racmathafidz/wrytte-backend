@@ -7,7 +7,7 @@ const user_get = async (req, res) => {
     res.set('Access-Control-Allow-Origin', 'http://localhost:3000'); 
     res.set('Access-Control-Allow-Credentials', true);     
 //     res.status(200).send(req.user);
-    res.status(200).json({
+    res.status(200).send({
       success: true,
       message: 'user has successfully authenticated',
       user: 'Ok',      
