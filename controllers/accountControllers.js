@@ -3,7 +3,7 @@ const User = require('../models/User');
 const Article = require('../models/Article');
 
 const user_get = async (req, res) => {
-  if (req.user) {
+//   if (req.user) {
     res.set('Access-Control-Allow-Origin', 'http://localhost:3000'); 
     res.set('Access-Control-Allow-Credentials', true);     
 //     res.status(200).send(req.user);
@@ -12,7 +12,7 @@ const user_get = async (req, res) => {
       message: 'user has successfully authenticated',
       user: 'Ok',      
     });
-  }
+//   }
 };
 
 const account_profile_get = async (req, res) => {
