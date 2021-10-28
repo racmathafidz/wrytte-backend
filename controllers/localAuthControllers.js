@@ -14,7 +14,7 @@ const signin_post = (req, res, next) => {
     else {
       req.login(user, (err) => {
         if (err) throw err;
-        res.send({ msg: 'Succesfully Login' });
+        res.send(req.user);
         console.log(req.user);
       });
     }
