@@ -10,7 +10,7 @@ const signin_post = (req, res, next) => {
   // the 'authenticate' process located in passport's configs strategy
   passport.authenticate('local', (err, user, info) => {
     if (err) throw err;
-    if (!user) res.send({ msg: 'No User Exist' });
+    if (!user) res.send({ msg: 'Wrong Email or Password.' });
     else {
       req.login(user, (err) => {
         if (err) throw err;
@@ -27,7 +27,7 @@ const signup_post = (req, res) => {
   User.findOne({ email }, async (err, doc) => {
     if (err) throw err;
     // doc is user's data
-    if (doc) res.send({ msg: 'User Already Exist.' });
+    if (doc) res.send({ msg: 'User with That Email Already Exist.' });
     if (!doc) {
       // make account userName from email address
       const userName = email.split('@');
