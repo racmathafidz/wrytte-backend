@@ -2,6 +2,12 @@
 const User = require('../models/User');
 const Article = require('../models/Article');
 
+const user_get = (req, res) => {
+  if (req.user) {
+    res.status(200).send(req.user);
+  }
+};
+
 const account_profile_get = async (req, res) => {
   try {
     const { userName } = req.params;
@@ -21,5 +27,6 @@ const account_profile_get = async (req, res) => {
 };
 
 module.exports = {
+  user_get,
   account_profile_get,
 };
