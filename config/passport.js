@@ -15,7 +15,7 @@ passport.use(
   new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
-    passReqToCallback: true, // allows us to send the req from our route (lets us check if a user is logged in or not)
+    // passReqToCallback: true, // allows us to send the req from our route (lets us check if a user is logged in or not)
   },
   (email, password, done) => {
     User.findOne({ email }, (err, user) => {
