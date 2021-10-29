@@ -5,7 +5,6 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-const passport = require('passport');
 const cookieParser = require('cookie-parser');
 
 require('./models/Article');
@@ -13,9 +12,8 @@ require('./models/User');
 const keys = require('./config/keys');
 const articleRoutes = require('./routes/articleRoutes');
 const accountRoutes = require('./routes/accountRoutes');
-const passportStrategyConfig = require('./config/passport');
 const localAuthRoutes = require('./routes/localAuthRoutes');
-// const googleAuthRoutes = require('./routes/googleAuthRoutes');
+const googleAuthRoutes = require('./routes/googleAuthRoutes');
 const signOutRoutes = require('./routes/signOutRoutes');
 
 // Port
@@ -33,6 +31,11 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 // User's session management
 app.use(session({
@@ -43,10 +46,6 @@ app.use(session({
 
 // Parsing cookie
 app.use(cookieParser(keys.cookie.secretKey)); // Cookie secret, have to match with session's secret
-
-// Passport
-app.use(passport.initialize()); // Initializing passport
-app.use(passport.session()); // Passport persistent login session
 
 // Connecting to database and start listening
 mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -63,7 +62,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth/local', localAuthRoutes);
-// app.use('/auth/google', googleAuthRoutes);
+app.use('/auth/google', googleAuthRoutes);
 app.use('/auth/signout', signOutRoutes);
 app.use('/api/article', articleRoutes);
 app.use('/api/account', accountRoutes);
