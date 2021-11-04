@@ -25,16 +25,13 @@ const UserSchema = new mongoose.Schema({
     required: true,
     default: 'images/avatar.png',
   },
-  local: {
-    password: {
-      type: String,
-      minlength: [6, 'minimum password length is 6 characters.'],
-    },
+  password: {
+    type: String,
+    default: '',
   },
   google: {
-    googleId: {
-      type: String,
-    },
+    type: Boolean,
+    default: false,
   },
 });
 
