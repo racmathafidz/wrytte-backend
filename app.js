@@ -6,15 +6,15 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
-require('./models/Article');
-require('./models/User');
+const Article = require('./models/Article');
+const User = require('./models/User');
 const keys = require('./config/keys');
 const articleRoutes = require('./routes/articleRoutes');
 const accountRoutes = require('./routes/accountRoutes');
 const localAuthRoutes = require('./routes/localAuthRoutes');
 const googleAuthRoutes = require('./routes/googleAuthRoutes');
-const signOutRoutes = require('./routes/signOutRoutes');
 
 // Port
 const PORT = process.env.PORT || 5000;
@@ -32,6 +32,7 @@ app.use(cors({
   credentials: true,
 }));
 app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
@@ -63,6 +64,5 @@ app.get('/', (req, res) => {
 
 app.use('/auth/local', localAuthRoutes);
 app.use('/auth/google', googleAuthRoutes);
-app.use('/auth/signout', signOutRoutes);
 app.use('/api/article', articleRoutes);
 app.use('/api/account', accountRoutes);
