@@ -1,57 +1,73 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
-const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 const User = require('../models/User');
+const keys = require('../config/keys');
 
-const signin_post = (req, res, next) => {
-  // the 'authenticate' process located in passport's configs strategy
-  passport.authenticate('local', (err, user, info) => {
-    if (err) throw err;
-    if (!user) res.send({ msg: 'Wrong Email or Password.' });
-    else {
-      req.login(user, (err) => {
-        if (err) throw err;
-        res.send(req.user);
-        console.log(req.user);
-      });
-    }
-  })(req, res, next);
+// Jwt expires time (1 day)
+const maxAge = 1 * 24 * 60 * 60;
+
+// Create jwt token
+const creatToken = (id) => jwt.sign({ id }, keys.cookie.secretKey, { expiresIn: maxAge });
+
+const local_signin_post = (req, res, next) => {
+  const { email, password } = req.body;
+
+  User.findOne({ email })
+    .then((response) => {
+      if (response) {
+        bcrypt.compare(password, response.password, (err, result) => {
+          if (err) throw err;
+          if (result === true) {
+            const token = creatToken(response.id);
+            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+            res.status(201).send(response);
+          } else {
+            res.send({ msg: 'Wrong Password.' });
+          }
+        });
+      } else {
+        res.send({ msg: 'No Account with That Email.' });
+      }
+    });
 };
 
-const signup_post = (req, res) => {
+const local_signup_post = (req, res) => {
   const { email, password, fullName } = req.body;
 
-  User.findOne({ email }, async (err, doc) => {
-    if (err) throw err;
-    // doc is user's data
-    if (doc) res.send({ msg: 'User with That Email Already Exist.' });
-    if (!doc) {
-      // make account userName from email address
-      const userName = email.split('@');
+  User.findOne({ email })
+    .then(async (response) => {
+      if (response) {
+        res.send({ msg: 'User with That Email Already Exist.' });
+      } else {
+        const userName = email.split('@');
 
-      // giving password salt and then hash it
-      const salt = await bcrypt.genSalt();
-      const hashedPassword = await bcrypt.hash(password, salt);
+        // Giving password salt and then hash it
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-      // create the account
-      await User.create({
-        email,
-        local: {
+        // Create the account
+        const user = await User.create({
+          email,
+          userName: userName[0],
+          fullName,
           password: hashedPassword,
-        },
-        userName: userName[0],
-        fullName,
-      })
-        .then(() => res.send({ msg: 'User Created' }))
-        .catch((err) => res.send(err));
-    }
-  });
+        }).then(() => res.send({ msg: 'User Created' }));
+      }
+    })
+    .catch((error) => res.send({ msg: error }));
+};
+
+const local_signout_get = (req, res) => {
+  res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
+  res.clearCookie('jwt', { path: '/' });
 };
 
 module.exports = {
-  signin_post,
-  signup_post,
+  local_signin_post,
+  local_signup_post,
+  local_signout_get,
 };
