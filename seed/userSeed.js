@@ -21,12 +21,8 @@ async function seedDB() {
         fullName: 'Frank Local',
         userName: 'frank.local',
         imageProfile: 'images/user1.jpg',
-        local: {
-          password: 'dummypassword',
-        },
-        google: {
-          googleId: '',
-        },
+        password: 'dummypassword',
+        google: false,
       },
       {
         _id: mongoose.Types.ObjectId('616c42fac8212c3b85d20821'),
@@ -34,12 +30,8 @@ async function seedDB() {
         fullName: 'Bella Google',
         userName: 'bella.google',
         imageProfile: 'images/user2.jpg',
-        local: {
-          password: '',
-        },
-        google: {
-          googleId: 'dummypassword',
-        },
+        password: '',
+        google: true,
       },
       {
         _id: mongoose.Types.ObjectId('616c442a098523df42b67984'),
@@ -47,12 +39,8 @@ async function seedDB() {
         fullName: 'Sasha Local',
         userName: 'sasha.local',
         imageProfile: 'images/user3.jpg',
-        local: {
-          password: 'dummypassword',
-        },
-        google: {
-          googleId: '',
-        },
+        password: 'dummypassword',
+        google: false,
       },
       {
         _id: mongoose.Types.ObjectId('616c44c0e7cc3ab4bf4b1b40'),
@@ -60,12 +48,8 @@ async function seedDB() {
         fullName: 'Ali Google',
         userName: 'ali.google',
         imageProfile: 'images/user4.jpg',
-        local: {
-          password: '',
-        },
-        google: {
-          googleId: 'dummypassword',
-        },
+        password: '',
+        google: true,
       },
     ];
 
