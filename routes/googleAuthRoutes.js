@@ -4,7 +4,8 @@ const googleAuthControllers = require('../controllers/googleAuthControllers');
 
 const router = Router();
 
-router.get('/', googleAuthControllers.google_auth_get);
-router.get('/redirect', googleAuthControllers.google_redirect_get);
+router.post('/', googleAuthControllers.google_auth_post);
+router.get('/signout', googleAuthControllers.google_signout_get);
+router.get('/user', googleAuthControllers.google_user_get);
 
 module.exports = router;
