@@ -40,9 +40,9 @@ const detail_article_get = async (req, res) => {
   try {
     const { title } = req.params;
     const lowerCaseTitle = dashToSpace(title);
-    const capitalizedTitle = capitalizeFirstLetter(lowerCaseTitle);
+    const regex = new RegExp(lowerCaseTitle);
 
-    const articleData = await Article.findOne({ articleTitle: capitalizedTitle })
+    const articleData = await Article.findOne({ articleTitle: { $regex: regex, $options: 'i' } })
       .populate('authorData');
 
     res.status(200).send(articleData);
