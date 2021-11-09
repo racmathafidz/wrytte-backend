@@ -23,15 +23,11 @@ const UserSchema = new mongoose.Schema({
   imageProfile: {
     type: String,
     required: true,
-    default: 'images/avatar.png',
+    default: 'https://res.cloudinary.com/racmathafidz/image/upload/v1636344430/avatar_bwqflp.png',
   },
   password: {
     type: String,
     default: '',
-  },
-  google: {
-    type: Boolean,
-    default: false,
   },
 });
 
