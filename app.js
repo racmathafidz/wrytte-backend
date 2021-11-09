@@ -11,6 +11,7 @@ require('dotenv').config();
 const Article = require('./models/Article');
 const User = require('./models/User');
 const keys = require('./config/keys');
+const pictureUploadRoutes = require('./routes/pictureUploadRoutes');
 const articleRoutes = require('./routes/articleRoutes');
 const accountRoutes = require('./routes/accountRoutes');
 const localAuthRoutes = require('./routes/localAuthRoutes');
@@ -62,6 +63,7 @@ app.get('/', (req, res) => {
   res.send('Wellcome to the dashboard.');
 });
 
+app.use('/picture-upload', pictureUploadRoutes);
 app.use('/auth/local', localAuthRoutes);
 app.use('/auth/google', googleAuthRoutes);
 app.use('/api/article', articleRoutes);
