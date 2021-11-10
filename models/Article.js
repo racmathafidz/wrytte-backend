@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 
 const { ObjectId } = mongoose.Schema.Types;
 
@@ -11,7 +10,6 @@ const ArticleSchema = new mongoose.Schema({
   articleTitle: {
     type: String,
     required: true,
-    unique: true,
   },
   articleBody: {
     type: String,
@@ -32,8 +30,6 @@ const ArticleSchema = new mongoose.Schema({
     required: true,
   },
 });
-
-ArticleSchema.plugin(uniqueValidator);
 
 const Article = mongoose.model('article', ArticleSchema);
 
