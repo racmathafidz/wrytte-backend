@@ -53,7 +53,6 @@ const detail_article_get = async (req, res) => {
 
 const new_article_post = async (req, res) => {
   try {
-    console.log(req.body);
     const { imageCover, articleTitle, articleBody, authorId, authorData } = req.body;
     await Article.create({
       imageCover,
@@ -62,9 +61,21 @@ const new_article_post = async (req, res) => {
       authorId,
       authorData,
     }).then((response) => {
-      console.log(response);
       res.status(200).send(response);
-    });
+    }).catch((err) => console.log(err));
+  } catch (error) {
+    res.status(500).send({ message: 'Internal Server Error', error });
+  }
+};
+
+const article_delete = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Article.findByIdAndDelete(id)
+      .then((response) => {
+        res.status(200).send(response);
+      });
   } catch (error) {
     res.status(500).send({ message: 'Internal Server Error', error });
   }
@@ -75,4 +86,5 @@ module.exports = {
   recomendation_article_get,
   detail_article_get,
   new_article_post,
+  article_delete,
 };
