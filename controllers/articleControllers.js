@@ -62,7 +62,7 @@ const new_article_post = async (req, res) => {
       authorData,
     }).then((response) => {
       res.status(200).send(response);
-    }).catch((err) => console.log(err));
+    }).catch((err) => res.status(500).send({ message: 'Internal Server Error', err }));
   } catch (error) {
     res.status(500).send({ message: 'Internal Server Error', error });
   }
@@ -81,10 +81,33 @@ const article_delete = async (req, res) => {
   }
 };
 
+const article_edit = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { imageCover, articleTitle, articleBody } = req.body;
+
+    await Article.findByIdAndUpdate(
+      id,
+      {
+        imageCover,
+        articleTitle: capitalizeFirstLetter(articleTitle),
+        articleBody,
+      },
+      { new: true },
+    )
+      .then((response) => {
+        res.status(200).send(response);
+      });
+  } catch (error) {
+    res.status(500).send({ message: 'Internal Server Error', error });
+  }
+};
+
 module.exports = {
   all_article_get,
   recomendation_article_get,
   detail_article_get,
   new_article_post,
   article_delete,
+  article_edit,
 };
