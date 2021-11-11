@@ -18,7 +18,6 @@ const picture_upload_post = (req, res) => {
     // Uploading
     uploader.upload(file)
       .then((result) => {
-        console.log(result);
         res.status(200).send({ image: result.secure_url });
       })
       .catch((err) => {

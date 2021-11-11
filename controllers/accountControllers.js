@@ -28,7 +28,6 @@ const account_profile_update = (req, res) => {
     // Option object { new: true } is for sending  updated data response
     User.findByIdAndUpdate(id, req.body, { new: true })
       .then((response) => {
-        console.log(response);
         res.status(200).send(response);
       });
   } catch (error) {
