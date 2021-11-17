@@ -28,13 +28,13 @@ app.use(express.static(path.join(__dirname, 'public'))); // Set public folder
 
 // Enable Cors
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://wrytte.netlify.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Origin', 'https://wrytte.netlify.app');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
