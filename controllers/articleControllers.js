@@ -45,6 +45,8 @@ const detail_article_get = async (req, res) => {
     const articleData = await Article.findOne({ articleTitle: { $regex: regex, $options: 'i' } })
       .populate('authorData');
 
+    if (!articleData) res.send({ msg: 'Article Not Found.' });
+
     res.status(200).send(articleData);
   } catch (error) {
     res.status(500).send({ message: 'Internal Server Error', error });

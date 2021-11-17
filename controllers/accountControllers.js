@@ -9,6 +9,8 @@ const account_profile_get = async (req, res) => {
 
     const profileData = await User.findOne({ userName });
 
+    if (!profileData) res.send({ msg: 'User Not Found.' });
+
     const articleData = await Article.find({ authorId: profileData.id })
       .sort({ publishDate: -1 })
       .populate('authorData');
@@ -18,7 +20,7 @@ const account_profile_get = async (req, res) => {
       articleData,
     });
   } catch (error) {
-    res.status(500).send({ message: 'Internal Server Error', error });
+    res.status(500).send({ msg: 'Internal Server Error' });
   }
 };
 
@@ -31,7 +33,7 @@ const account_profile_update = (req, res) => {
         res.status(200).send(response);
       });
   } catch (error) {
-    res.status(500).send({ message: 'Internal Server Error', error });
+    res.status(500).send({ msg: 'Internal Server Error', error });
   }
 };
 
