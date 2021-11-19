@@ -2,10 +2,6 @@
 /* eslint-disable camelcase */
 const Article = require('../models/Article');
 
-function dashToSpace(string) {
-  return string.replace(/-/g, ' ');
-}
-
 function capitalizeFirstLetter(string) {
   const arr = string.split(' ').map((items) => items.charAt(0).toUpperCase() + items.slice(1));
   return arr.join(' ');
@@ -38,11 +34,9 @@ const recomendation_article_get = async (req, res) => {
 
 const detail_article_get = async (req, res) => {
   try {
-    const { title } = req.params;
-    const lowerCaseTitle = dashToSpace(title);
-    const regex = new RegExp(lowerCaseTitle);
+    const { id } = req.params;
 
-    const articleData = await Article.findOne({ articleTitle: { $regex: regex, $options: 'i' } })
+    const articleData = await Article.findById(id)
       .populate('authorData');
 
     if (!articleData) res.send({ msg: 'Article Not Found.' });
