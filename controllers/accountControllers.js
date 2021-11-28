@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable camelcase */
+
+
 const User = require('../models/User');
 const Article = require('../models/Article');
 

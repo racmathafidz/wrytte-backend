@@ -1,5 +1,3 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable camelcase */
 const Article = require('../models/Article');
 
 function capitalizeFirstLetter(string) {

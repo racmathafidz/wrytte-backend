@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable camelcase */
+
+
 const { OAuth2Client } = require('google-auth-library');
 
 const User = require('../models/User');

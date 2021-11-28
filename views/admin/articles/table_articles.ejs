@@ -1,0 +1,46 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Articles Data</h6>
+  </div>
+  <div class="card-body">
+      <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                  <tr>
+                      <th rowspan="2">No.</th>
+                      <th rowspan="2">Article Title</th>
+                      <th colspan="2">Author</th>                      
+                      <th rowspan="2">Publish Date</th>
+                      <th rowspan="2">Action</th>                      
+                  </tr>
+                  <tr>
+                      <th>Full Name</th>
+                      <th>User Name</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <% articlesData.map((items, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= items.articleTitle %></td>
+                        <td><%= items.authorData.fullName %></td>
+                        <td><%= items.authorData.userName %></td>
+                        <td><%= dateFormatter(items.publishDate) %></td>
+                        <td>
+                            <form action="/admin/article_delete/<%= items._id %>?_method=DELETE" method="post">
+                                <button 
+                                    type="submit"                    
+                                    class="btn btn-danger btn-circle btn-sm"
+                                >
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
