@@ -70,7 +70,6 @@ mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true, useUnifiedTopology
   .catch((err) => console.log(err));
 
 // Routing
-// app.get('*', checkUser);
 app.get('/', (req, res) => {
   res.redirect('/auth/admin');
 });
@@ -88,3 +87,6 @@ app.get('*', (req, res) => {
     title: 'Page Not Found',
   });
 });
+
+// Exports for testing
+module.exports = app;

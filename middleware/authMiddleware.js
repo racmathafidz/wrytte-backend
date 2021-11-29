@@ -1,5 +1,3 @@
-
-
 const jwt = require('jsonwebtoken');
 const Admin = require('../models/Admin');
 const keys = require('../config/keys');

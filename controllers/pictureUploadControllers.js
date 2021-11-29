@@ -1,4 +1,3 @@
-
 const DatauriParser = require('datauri/parser');
 const path = require('path');
 

@@ -1,5 +1,3 @@
-
-
 const { OAuth2Client } = require('google-auth-library');
 
 const User = require('../models/User');
