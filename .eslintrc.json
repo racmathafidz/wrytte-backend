@@ -16,6 +16,8 @@
       "max-len": "off",
       "camelcase": "off",
       "object-curly-newline": "off",
-      "no-shadow": "off"
+      "no-shadow": "off",
+      "no-undef": "off",
+      "no-underscore-dangle": "off"
     } 
 }
