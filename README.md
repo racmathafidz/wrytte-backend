@@ -1,4 +1,7 @@
 # Wrytte Backend
+![alt text](https://github.com/racmathafidz/wrytte-backend/blob/main/public/images/screely.png)
+
+### About
 Backend/server side for provide REST API and Admin Dashboard for [**Wrytte Frontend**](https://github.com/racmathafidz/wrytte-frontend). 
 
 ### Tech Stack
