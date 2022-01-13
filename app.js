@@ -85,6 +85,7 @@ app.use('/api/account', accountRoutes);
 app.get('*', (req, res) => {
   res.render('admin/404/view_404.ejs', {
     title: 'Page Not Found',
+    userName: res.locals.user.userName,
   });
 });
 
